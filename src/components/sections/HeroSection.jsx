@@ -18,6 +18,8 @@ export default function HeroSection() {
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const searchRef = useRef(null)
 
+
+
   const filteredCourses = COURSES.filter(course =>
     course.name.toLowerCase().includes(searchValue.toLowerCase()) ||
     course.category.toLowerCase().includes(searchValue.toLowerCase())
@@ -58,7 +60,7 @@ export default function HeroSection() {
 
             {/* CTA Button */}
             <div className="pt-0.5">
-              <button className="group inline-flex items-center justify-center gap-1.5 px-3.5 py-2 bg-accent text-accent-foreground rounded-full text-xs font-semibold hover:shadow-lg hover:shadow-accent/30 transition-all hover:gap-2.5 active:scale-95">
+              <button className="group inline-flex items-center justify-center gap-1.5 px-3.5 py-2 bg-accent text-accent-foreground rounded-full text-xs font-semibold hover:shadow-lg hover:shadow-accent/30 transition-all hover:gap-2.5 active:scale-95 cursor-pointer">
                 Start Learning Free
                 <ArrowRight className="w-3 h-3" />
               </button>
@@ -86,7 +88,7 @@ export default function HeroSection() {
                     setSearchValue('')
                     setIsSearchOpen(false)
                   }}
-                  className="absolute right-2.5 text-muted-foreground hover:text-foreground transition-colors"
+                  className="absolute right-2.5 text-muted-foreground hover:text-foreground transition-colors cursor-pointer "
                 >
                   <X className="w-3 h-3" />
                 </button>
@@ -101,7 +103,7 @@ export default function HeroSection() {
                     {filteredCourses.map((course) => (
                       <button
                         key={course.id}
-                        className="w-full text-left px-2.5 py-1.5 hover:bg-card transition-colors flex items-center justify-between group text-xs"
+                        className="w-full text-left px-2.5 py-1.5 hover:bg-card transition-colors flex items-center justify-between group text-xs cursor-pointer "
                       >
                         <div>
                           <p className="font-medium text-foreground group-hover:text-accent transition-colors text-xs">
@@ -127,7 +129,7 @@ export default function HeroSection() {
           {/* Right Column - Screenshot Frames */}
           <div className="relative h-40 hidden lg:block animate-fadeInScale [animation-delay:200ms]">
             {/* Background frame 1 - Blue subtle frame */}
-            <div className="absolute top-0 right-0 w-60 h-64 bg-accent/5 border border-accent/20 rounded-lg shadow-lg overflow-hidden transform translate-x-4 translate-y-2">
+            <div className="absolute top-0 right-0 w-60 h-64 bg-accent/5 border border-accent/20 rounded-lg shadow-lg overflow-hidden transform translate-x-4 translate-y-2 hover:translate-x-2 hover:translate-y-1 transition-transform duration-300 ">
               <div className="w-full h-full bg-linear-to-br from-accent/10 to-accent/5 flex items-center justify-center">
                 <div className="text-center">
                   <div className="w-8 h-8 bg-accent/30 rounded-lg mx-auto mb-2" />
@@ -137,7 +139,7 @@ export default function HeroSection() {
             </div>
 
             {/* Middle frame - White foreground frame */}
-            <div className="absolute bottom-18 right-18 w-54 h-58 bg-white border border-border rounded-lg shadow-xl overflow-hidden">
+            <div className="absolute bottom-18 right-18 w-54 h-58 bg-white border border-border rounded-lg shadow-xl overflow-hidden hover:scale-102 transform translate-x-2 -translate-y-2 hover:translate-x-1 hover:-translate-y-1 transition-all duration-300">
               <div className="w-full h-full bg-card p-4 space-y-3">
                 <div className="space-y-1.5">
                   <div className="h-2 bg-border rounded-full w-2/3" />
@@ -152,7 +154,7 @@ export default function HeroSection() {
             </div>
 
             {/* Top frame - Dark accent frame */}
-            <div className="absolute top-4 right-50 w-50 h-54 bg-foreground/5 border border-foreground/10 rounded-lg shadow-lg overflow-hidden">
+            <div className="absolute top-4 right-50 w-50 h-54 bg-foreground/5 border border-foreground/10 rounded-lg shadow-lg overflow-hidden transform -translate-x-1 -translate-y-1 hover:translate-x-0 hover:translate-y-0 transition-transform duration-300">
               <div className="w-full h-full bg-linear-to-b from-foreground/5 to-foreground/0 flex items-end p-4">
                 <div className="w-full space-y-1.5">
                   <div className="h-1.5 bg-foreground/20 rounded-full" />

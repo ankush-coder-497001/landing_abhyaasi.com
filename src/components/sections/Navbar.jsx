@@ -1,4 +1,3 @@
-'use client'
 
 import { useEffect, useState } from 'react'
 import { Menu, X } from 'lucide-react'
@@ -6,6 +5,7 @@ import { Menu, X } from 'lucide-react'
 export default function Navbar({ scrollY }) {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const APP_URL = import.meta.env.VITE_APP_URL
 
   useEffect(() => {
     setIsScrolled(scrollY > 50)
@@ -21,26 +21,26 @@ export default function Navbar({ scrollY }) {
       <div className={`flex items-center justify-between px-4 md:px-6 py-3 ${isScrolled ? 'bg-background/80 backdrop-blur-xl border border-border rounded-2xl' : ''
         } md:bg-transparent md:border-0 md:backdrop-blur-0`}>
         {/* Logo */}
-        <div className="flex items-center gap-2">
-          <div className="w-2 h-2 bg-accent rounded-full" />
-          <span className="text-xs font-semibold text-foreground tracking-wider">ABHYASI.COM</span>
+        <div className="flex  items-center gap-2">
+          {/* <div className="w-2 h-2 bg-accent rounded-full" /> */}
+          <span className="text-xs font-semibold text-foreground tracking-wider">Abhyaasi.com</span>
         </div>
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-1 text-xs">
-          <a href="#learn" className="px-3 py-1.5 text-muted-foreground hover:text-accent transition-colors">
-            Learn
+          <a href="#learn" className="px-3 py-1.5 text-muted-foreground hover:text-accent transition-colors cursor-pointer ">
+            Home
           </a>
-          <a href="#build" className="px-3 py-1.5 text-muted-foreground hover:text-accent transition-colors">
-            Build
+          <a href="#build" className="px-3 py-1.5 text-muted-foreground hover:text-accent transition-colors cursor-pointer ">
+            Courses
           </a>
-          <a href="#achieve" className="px-3 py-1.5 text-muted-foreground hover:text-accent transition-colors">
-            Achieve
+          <a href="#achieve" className="px-3 py-1.5 text-muted-foreground hover:text-accent transition-colors cursor-pointer ">
+            Dashboard
           </a>
         </div>
 
         {/* Desktop CTA Button */}
-        <button className="hidden md:block px-4 py-1.5 bg-accent text-accent-foreground rounded-lg text-xs font-medium hover:opacity-90 transition-opacity">
+        <button className="hidden md:block px-4 py-1.5 bg-accent text-accent-foreground rounded-lg text-xs font-medium hover:opacity-90 transition-opacity cursor-pointer ">
           Start Free
         </button>
 

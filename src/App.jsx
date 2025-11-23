@@ -13,6 +13,8 @@ function App() {
   const [showSplash, setShowSplash] = useState(true)
   const [scrollY, setScrollY] = useState(0)
 
+
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowSplash(false)
@@ -47,6 +49,9 @@ function App() {
     elements.forEach((el) => observer.observe(el))
     return () => observer.disconnect()
   }, [])
+
+
+
 
   return (
     <main className="min-h-screen bg-background">
