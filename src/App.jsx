@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import './App.css'
 import SplashLoader from './components/sections/SplashLoader'
 import HeroSection from './components/sections/HeroSection'
@@ -9,11 +10,11 @@ import CTASection from './components/sections/CTASection'
 import Footer from './components/sections/Footer'
 import Navbar from './components/sections/Navbar'
 
+const queryClient = new QueryClient()
+
 function App() {
   const [showSplash, setShowSplash] = useState(true)
   const [scrollY, setScrollY] = useState(0)
-
-
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -54,20 +55,22 @@ function App() {
 
 
   return (
-    <main className="min-h-screen bg-background">
-      {showSplash && <SplashLoader />}
-      {!showSplash && (
-        <>
-          <Navbar scrollY={scrollY} />
-          <HeroSection />
-          <StepperSection />
-          <FeaturesSection />
-          <PricingSection />
-          <CTASection />
-          <Footer />
-        </>
-      )}
-    </main>
+    <QueryClientProvider client={queryClient}>
+      <main className="min-h-screen bg-background">
+        {showSplash && <SplashLoader />}
+        {!showSplash && (
+          <>
+            <Navbar scrollY={scrollY} />
+            <HeroSection />
+            <StepperSection />
+            <FeaturesSection />
+            <PricingSection />
+            <CTASection />
+            <Footer />
+          </>
+        )}
+      </main>
+    </QueryClientProvider>
   )
 }
 

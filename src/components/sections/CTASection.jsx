@@ -15,11 +15,11 @@ export default function CTASection() {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-3 justify-center mb-8">
-          <button className="group inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-accent text-accent-foreground rounded-lg text-xs font-semibold hover:opacity-90 transition-all hover:gap-3 cursor-pointer ">
+          <button onClick={() => window.open(`${import.meta.env.VITE_APP_URL}`, '_blank')} className="group inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-accent text-accent-foreground rounded-lg text-xs font-semibold hover:opacity-90 transition-all hover:gap-3 cursor-pointer ">
             Start Free Today
             <ArrowRight className="w-3.5 h-3.5" />
           </button>
-          <button className="px-6 py-2.5 border border-border bg-background text-foreground rounded-lg text-xs font-semibold hover:bg-card hover:border-accent/30 transition-colors cursor-pointer ">
+          <button onClick={() => window.open(`${import.meta.env.VITE_APP_URL}/courses`, '_blank')} className="px-6 py-2.5 border border-border bg-background text-foreground rounded-lg text-xs font-semibold hover:bg-card hover:border-accent/30 transition-colors cursor-pointer ">
             Brows Courses
           </button>
         </div>

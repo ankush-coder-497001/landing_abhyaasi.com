@@ -1,28 +1,28 @@
 
 import { useEffect, useRef, useState } from 'react'
+import { useQuery } from '@tanstack/react-query'
 import { Search, X, ArrowRight } from 'lucide-react'
-import { LampContainer } from "../ui/lamp";
-
-
-const COURSES = [
-  { id: 1, name: 'Web Development with React', category: 'Frontend', level: 'Beginner' },
-  { id: 2, name: 'Advanced Node.js & Express', category: 'Backend', level: 'Advanced' },
-  { id: 3, name: 'Full Stack MERN', category: 'Full Stack', level: 'Intermediate' },
-  { id: 4, name: 'Python for Data Science', category: 'Data Science', level: 'Beginner' },
-  { id: 5, name: 'Mobile App Development', category: 'Mobile', level: 'Intermediate' },
-  { id: 6, name: 'Cloud & DevOps Essentials', category: 'DevOps', level: 'Advanced' },
-]
+import { LampContainer } from "../ui/lamp"
+import { getAllCourses } from '../../../api_services/course.svc'
 
 export default function HeroSection() {
   const [searchValue, setSearchValue] = useState('')
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const searchRef = useRef(null)
 
+  // Fetch courses using React Query
+  const { data: coursesData, isLoading, error } = useQuery({
+    queryKey: ['courses'],
+    queryFn: getAllCourses,
+  })
 
+  // Get courses array - handle different response formats
+  const courses = coursesData?.courses || coursesData?.data || coursesData || []
 
-  const filteredCourses = COURSES.filter(course =>
-    course.name.toLowerCase().includes(searchValue.toLowerCase()) ||
-    course.category.toLowerCase().includes(searchValue.toLowerCase())
+  const filteredCourses = courses.filter(course =>
+    course?.title?.toLowerCase().includes(searchValue.toLowerCase()) ||
+    course?.description?.toLowerCase().includes(searchValue.toLowerCase()) ||
+    course?.slug?.toLowerCase().includes(searchValue.toLowerCase())
   )
 
   useEffect(() => {
@@ -37,6 +37,17 @@ export default function HeroSection() {
       return () => document.removeEventListener('mousedown', handleClickOutside)
     }
   }, [isSearchOpen])
+
+  const handleCourseClick = (courseId) => {
+    setIsSearchOpen(false);
+    setSearchValue('');
+
+    const rawUrl = import.meta.env.VITE_APP_URL || 'http://localhost:5173/';
+    const appUrl = rawUrl.replace(/\/+$/, ""); // remove trailing slashes
+
+    window.open(`${appUrl}/course-details/${courseId}`, '_blank', 'noopener,noreferrer');
+  };
+
 
   return (
     <section className="relative w-screen h-screen bg-background overflow-hidden">
@@ -60,7 +71,7 @@ export default function HeroSection() {
 
             {/* CTA Button */}
             <div className="pt-0.5">
-              <button className="group inline-flex items-center justify-center gap-1.5 px-3.5 py-2 bg-accent text-accent-foreground rounded-full text-xs font-semibold hover:shadow-lg hover:shadow-accent/30 transition-all hover:gap-2.5 active:scale-95 cursor-pointer">
+              <button onClick={() => window.open(`${import.meta.env.VITE_APP_URL}`, '_blank')} className="group inline-flex items-center justify-center gap-1.5 px-3.5 py-2 bg-accent text-accent-foreground rounded-full text-xs font-semibold hover:shadow-lg hover:shadow-accent/30 transition-all hover:gap-2.5 active:scale-95 cursor-pointer">
                 Start Learning Free
                 <ArrowRight className="w-3 h-3" />
               </button>
@@ -98,19 +109,28 @@ export default function HeroSection() {
             {/* Search Results */}
             {isSearchOpen && (
               <div className="absolute top-full mt-1.5 w-full bg-white border border-border rounded-lg shadow-lg overflow-hidden z-50 max-h-40 overflow-y-auto">
-                {filteredCourses.length > 0 ? (
+                {isLoading ? (
+                  <div className="px-2.5 py-3 text-center">
+                    <p className="text-xs text-muted-foreground">Loading courses...</p>
+                  </div>
+                ) : error ? (
+                  <div className="px-2.5 py-3 text-center">
+                    <p className="text-xs text-muted-foreground">Failed to load courses</p>
+                  </div>
+                ) : filteredCourses.length > 0 ? (
                   <div className="divide-y divide-border/30">
                     {filteredCourses.map((course) => (
                       <button
-                        key={course.id}
+                        onClick={() => handleCourseClick(course._id)}
+                        key={course._id}
                         className="w-full text-left px-2.5 py-1.5 hover:bg-card transition-colors flex items-center justify-between group text-xs cursor-pointer "
                       >
                         <div>
                           <p className="font-medium text-foreground group-hover:text-accent transition-colors text-xs">
-                            {course.name}
+                            {course.title}
                           </p>
                           <p className="text-[9px] text-muted-foreground mt-0.5">
-                            {course.category} • {course.level}
+                            {course.duration} • {course.difficulty}
                           </p>
                         </div>
                         <ArrowRight className="w-2 h-2 text-accent opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />

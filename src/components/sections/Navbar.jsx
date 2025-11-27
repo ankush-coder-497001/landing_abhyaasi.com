@@ -31,16 +31,20 @@ export default function Navbar({ scrollY }) {
           <a href="#learn" className="px-3 py-1.5 text-muted-foreground hover:text-accent transition-colors cursor-pointer ">
             Home
           </a>
-          <a href="#build" className="px-3 py-1.5 text-muted-foreground hover:text-accent transition-colors cursor-pointer ">
+          <a onClick={() => window.open(`${APP_URL}/courses`, '_blank')} className="px-3 py-1.5 text-muted-foreground hover:text-accent transition-colors cursor-pointer ">
             Courses
           </a>
-          <a href="#achieve" className="px-3 py-1.5 text-muted-foreground hover:text-accent transition-colors cursor-pointer ">
+          <a onClick={() => {
+            window.open(`${APP_URL}/dashboard`, '_blank')
+          }} className="px-3 py-1.5 text-muted-foreground hover:text-accent transition-colors cursor-pointer ">
             Dashboard
           </a>
         </div>
 
         {/* Desktop CTA Button */}
-        <button className="hidden md:block px-4 py-1.5 bg-accent text-accent-foreground rounded-lg text-xs font-medium hover:opacity-90 transition-opacity cursor-pointer ">
+        <button onClick={() => {
+          window.open(`${APP_URL}`, '_blank')
+        }} className="hidden md:block px-4 py-1.5 bg-accent text-accent-foreground rounded-lg text-xs font-medium hover:opacity-90 transition-opacity cursor-pointer ">
           Start Free
         </button>
 
@@ -59,16 +63,16 @@ export default function Navbar({ scrollY }) {
       {isMobileMenuOpen && (
         <div className="md:hidden absolute top-full left-4 right-4 mt-2 bg-background/95 backdrop-blur-lg border border-border rounded-xl shadow-lg overflow-hidden">
           <div className="flex flex-col p-4 gap-3">
-            <a href="#learn" className="px-3 py-2 text-sm text-muted-foreground hover:text-accent hover:bg-card rounded-lg transition-colors">
-              Learn
+            <a href="/" className="px-3 py-2 text-sm text-muted-foreground hover:text-accent hover:bg-card rounded-lg transition-colors">
+              Home
             </a>
-            <a href="#build" className="px-3 py-2 text-sm text-muted-foreground hover:text-accent hover:bg-card rounded-lg transition-colors">
-              Build
+            <a onClick={() => window.open(`${APP_URL}/courses`, '_blank')} className="px-3 py-2 text-sm text-muted-foreground hover:text-accent hover:bg-card rounded-lg transition-colors">
+              Courses
             </a>
-            <a href="#achieve" className="px-3 py-2 text-sm text-muted-foreground hover:text-accent hover:bg-card rounded-lg transition-colors">
-              Achieve
+            <a onClick={() => window.open(`${APP_URL}/dashboard`, '_blank')} className="px-3 py-2 text-sm text-muted-foreground hover:text-accent hover:bg-card rounded-lg transition-colors">
+              Dashboard
             </a>
-            <button className="w-full mt-2 px-4 py-2 bg-accent text-accent-foreground rounded-lg text-sm font-medium hover:opacity-90 transition-opacity">
+            <button onClick={() => window.open(`${APP_URL}`, '_blank')} className="w-full mt-2 px-4 py-2 bg-accent text-accent-foreground rounded-lg text-sm font-medium hover:opacity-90 transition-opacity">
               Start Free
             </button>
           </div>
