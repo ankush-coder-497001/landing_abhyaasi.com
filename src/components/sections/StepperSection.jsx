@@ -1,38 +1,41 @@
 "use client"
 
-import { CheckCircle2 } from "lucide-react"
+import { CheckCircle2, ArrowRight } from "lucide-react"
 import { motion } from "framer-motion"
 
 export default function StepperSection() {
   const steps = [
     {
       number: 1,
-      title: "Choose a Course",
-      description: "Browse our structured curriculum and pick what you want to master.",
-      details: ["10+ courses available", "For all skill levels", "Industry-focused"],
+      title: "Learn Theory",
+      description: "Clear, concise explanations of core concepts with visual aids and expert guidance.",
+      icon: "📖",
+      details: ["Structured modules", "Visual learning", "Progressive difficulty"],
     },
     {
       number: 2,
-      title: "Learn Through Modules",
-      description: "Each module combines theory with practice for deeper understanding.",
+      title: "Build Projects",
+      description: "Apply your knowledge with hands-on mini-projects validated by automated test cases.",
+      icon: "🛠️",
       details: [
-        "📚 Explanation - Text and visuals",
-        "💻 Coding - Hands-on projects",
-        "❓ MCQ - Knowledge checks",
-        "🎤 Interview - Mock interviews questions & answers ",
+        "Real-world projects",
+        "Live code feedback",
+        "Portfolio pieces",
       ],
     },
     {
       number: 3,
-      title: "Build & Practice",
-      description: "Work on real-world projects while learning industry best practices.",
-      details: ["Complete assignments", "Get code reviews", "Build portfolio"],
+      title: "Master Assessments",
+      description: "Test your knowledge with MCQs and interview questions to solidify concepts.",
+      icon: "✅",
+      details: ["MCQs & tests", "Interview prep", "Progress tracking"],
     },
     {
       number: 4,
-      title: "You're Job Ready",
-      description: "Graduate with skills employers want and a portfolio to prove it.",
-      details: ["Get certificate", "Access job board", "Career guidance"],
+      title: "Achieve & Grow",
+      description: "Earn badges, climb leaderboards, and get certified to showcase your skills.",
+      icon: "🏆",
+      details: ["Gamification", "Certificates", "Job readiness"],
     },
   ]
 
@@ -41,23 +44,23 @@ export default function StepperSection() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.15,
+        staggerChildren: 0.12,
+        delayChildren: 0.2,
       },
     },
   }
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
         type: "spring",
-        velocity: 1.5,
-        damping: 15,
+        velocity: 1.2,
+        damping: 16,
         mass: 1,
-        stiffness: 80,
+        stiffness: 70,
       },
     },
   }
@@ -68,54 +71,66 @@ export default function StepperSection() {
       scaleX: 1,
       opacity: 1,
       transition: {
-        duration: 0.8,
-        delay: 0.3,
+        duration: 1,
+        delay: 0.4,
         ease: "easeOut",
       },
     },
   }
 
   const numberVariants = {
-    hidden: { scale: 0.8, opacity: 0 },
+    hidden: { scale: 0, opacity: 0, rotate: -180 },
     visible: {
       scale: 1,
       opacity: 1,
+      rotate: 0,
       transition: {
         type: "spring",
-        velocity: 1.5,
-        damping: 12,
-        mass: 0.8,
-        stiffness: 90,
+        velocity: 2,
+        damping: 10,
+        mass: 0.7,
+        stiffness: 100,
       },
     },
   }
 
   return (
-    <section className="py-20 px-4 bg-background relative overflow-hidden">
-      <div className="max-w-6xl mx-auto relative z-10">
+    <section className="py-16 md:py-24 px-4 bg-gradient-to-b from-white via-blue-50/30 to-white relative overflow-hidden">
+      {/* Decorative elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 right-0 w-96 h-96 bg-blue-100/30 rounded-full blur-3xl opacity-40" />
+        <div className="absolute -bottom-40 left-0 w-96 h-96 bg-blue-100/20 rounded-full blur-3xl opacity-30" />
+      </div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
+        {/* Header */}
         <motion.div
-          className="text-center mb-14"
+          className="text-center mb-16"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
         >
-          <motion.h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3" variants={itemVariants}>
-            How You'll Learn
+          <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200 mb-5">
+            <span className="text-xs font-bold text-blue-700">4-Step Learning Path</span>
+          </motion.div>
+          <motion.h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground mb-4" variants={itemVariants}>
+            Your Journey to Mastery
           </motion.h2>
-          <motion.p className="text-sm text-muted-foreground max-w-2xl mx-auto leading-relaxed" variants={itemVariants}>
-            A structured path designed to take you from beginner to job-ready
+          <motion.p className="text-base md:text-lg text-foreground/75 max-w-2xl mx-auto leading-relaxed" variants={itemVariants}>
+            A proven path designed to transform you from curious learner to confident developer ready for professional challenges
           </motion.p>
         </motion.div>
 
+        {/* Steps */}
         <div className="relative">
+          {/* Connection line */}
           <motion.div
-            className="absolute top-8 left-0 right-0 h-0.5 bg-blue-500 hidden md:block"
+            className="absolute top-16 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-blue-600 to-transparent hidden md:block"
             variants={lineVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
-            style={{ originX: 0 }}
           />
 
           <motion.div
@@ -130,38 +145,75 @@ export default function StepperSection() {
                 key={index}
                 variants={itemVariants}
                 whileHover={{
-                  y: -6,
+                  y: -8,
                   transition: {
                     type: "spring",
-                    velocity: 1.5,
+                    velocity: 2,
                     damping: 14,
-                    mass: 0.9,
                   },
                 }}
-                className="flex flex-col"
+                className="flex flex-col relative"
               >
-                <div className="relative mb-6">
+                {/* Decorative arrow for mobile */}
+                {index < steps.length - 1 && (
+                  <div className="md:hidden flex justify-center my-4">
+                    <ArrowRight className="w-6 h-6 text-blue-600 rotate-90" />
+                  </div>
+                )}
+
+                {/* Step number */}
+                <div className="relative mb-8 flex flex-col items-center">
                   <motion.div
-                    className="flex items-center justify-center h-14 w-14 rounded-full bg-blue-600 text-white font-semibold text-base mx-auto border-2 border-white shadow-sm"
+                    className="w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-600 to-blue-700 text-white font-black text-2xl flex items-center justify-center shadow-lg shadow-blue-600/40 relative z-10 border-4 border-white"
                     variants={numberVariants}
                   >
                     {step.number}
                   </motion.div>
+                  {/* Line connector on desktop */}
+                  {index < steps.length - 1 && (
+                    <div className="hidden md:block absolute top-20 left-1/2 -translate-x-1/2 w-0.5 h-20 bg-gradient-to-b from-blue-600 to-transparent" />
+                  )}
                 </div>
 
-                <motion.div className="text-center flex-1" variants={containerVariants}>
-                  <motion.h3 className="text-sm font-semibold text-foreground mb-2" variants={itemVariants}>
+                {/* Content */}
+                <motion.div
+                  className="text-center flex-1 space-y-4 px-2"
+                  variants={containerVariants}
+                >
+                  {/* Icon */}
+                  <motion.div
+                    className="text-4xl"
+                    variants={itemVariants}
+                  >
+                    {step.icon}
+                  </motion.div>
+
+                  {/* Title */}
+                  <motion.h3
+                    className="text-xl font-bold text-foreground"
+                    variants={itemVariants}
+                  >
                     {step.title}
                   </motion.h3>
-                  <motion.p className="text-xs text-muted-foreground mb-4 leading-relaxed" variants={itemVariants}>
+
+                  {/* Description */}
+                  <motion.p
+                    className="text-sm text-foreground/60 leading-relaxed"
+                    variants={itemVariants}
+                  >
                     {step.description}
                   </motion.p>
 
-                  <motion.div className="space-y-2" variants={containerVariants}>
+                  {/* Details */}
+                  <motion.div className="space-y-3 pt-4 border-t border-border/30" variants={containerVariants}>
                     {step.details.map((detail, i) => (
-                      <motion.div key={i} className="flex items-start gap-2 text-xs" variants={itemVariants}>
-                        <CheckCircle2 className="w-3.5 h-3.5 text-blue-500 flex-shrink-0 mt-0.5" />
-                        <span className="text-muted-foreground text-left">{detail}</span>
+                      <motion.div
+                        key={i}
+                        className="flex items-center justify-center gap-2 text-sm"
+                        variants={itemVariants}
+                      >
+                        <CheckCircle2 className="w-4 h-4 text-blue-600 flex-shrink-0" />
+                        <span className="text-foreground/70">{detail}</span>
                       </motion.div>
                     ))}
                   </motion.div>

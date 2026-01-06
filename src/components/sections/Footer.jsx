@@ -1,57 +1,94 @@
-'use client'
+
+import { Github, Linkedin } from 'lucide-react'
+import { motion } from 'framer-motion'
 
 export default function Footer() {
+  const currentYear = new Date().getFullYear()
+
   return (
-    <footer className="bg-primary text-primary-foreground border-t border-border py-16 px-4">
-      <div className="max-w-6xl mx-auto">
-        <div className="grid md:grid-cols-4 gap-10 mb-10">
-          <div>
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-1.5 h-1.5 bg-accent rounded-full" />
-              <span className="text-xs font-bold tracking-wider">ABHYASI</span>
+    <footer className="bg-white border-t border-border/20 relative overflow-hidden">
+      {/* Subtle gradient background */}
+      <div className="absolute inset-0 bg-linear-to-br from-white via-blue-50/20 to-white pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 relative z-10 py-12 md:py-16">
+        {/* Main Footer Content */}
+        <motion.div
+          className="space-y-8"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6 }}
+        >
+          {/* Brand & Built By Message */}
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            {/* Left: Abhyaasi Branding */}
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-linear-to-br from-blue-600 to-blue-700 rounded-lg flex items-center justify-center shadow-md">
+                <span className="text-white font-bold text-lg">A</span>
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-foreground">Abhyaasi</p>
+                <p className="text-xs text-foreground/50">Learning Platform</p>
+              </div>
             </div>
-            <p className="text-xs text-primary-foreground/70 leading-relaxed">
-              Structured learning for aspiring developers from Tier-3 colleges to tech giants.
-            </p>
+
+            {/* Center: Built By Message */}
+            <div className="text-center">
+              <p className="text-xs text-foreground/60 uppercase tracking-wider mb-2">Crafted with passion</p>
+              <p className="text-sm md:text-base font-bold text-foreground">
+                Built by <span className="bg-linear-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">Ankush</span>
+              </p>
+            </div>
+
+            {/* Right: Social Links */}
+            <div className="flex items-center gap-3">
+              <motion.a
+                href="https://github.com/ankush-coder-497001"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.15, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-10 h-10 rounded-lg bg-foreground text-white flex items-center justify-center hover:shadow-lg hover:shadow-foreground/30 transition-all duration-300 cursor-pointer"
+                title="GitHub"
+              >
+                <Github className="w-5 h-5" />
+              </motion.a>
+              <motion.a
+                href="https://www.linkedin.com/in/ankush-kumar-gupta-88b383305"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.15, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-10 h-10 rounded-lg bg-blue-600 text-white flex items-center justify-center hover:shadow-lg hover:shadow-blue-600/40 transition-all duration-300 cursor-pointer"
+                title="LinkedIn"
+              >
+                <Linkedin className="w-5 h-5" />
+              </motion.a>
+            </div>
           </div>
 
-          <div>
-            <h4 className="text-xs font-bold mb-4 uppercase tracking-wider">Product</h4>
-            <ul className="space-y-2.5 text-xs text-primary-foreground/70">
-              <li><a href="#" className="hover:text-accent transition-colors">Courses</a></li>
-              <li><a href="#" className="hover:text-accent transition-colors">Projects</a></li>
-              <li><a href="#" className="hover:text-accent transition-colors">Pricing</a></li>
-            </ul>
-          </div>
+          {/* Divider */}
+          <div className="h-px bg-linear-to-r from-transparent via-border to-transparent" />
 
-          <div>
-            <h4 className="text-xs font-bold mb-4 uppercase tracking-wider">Company</h4>
-            <ul className="space-y-2.5 text-xs text-primary-foreground/70">
-              <li><a href="#" className="hover:text-accent transition-colors">About</a></li>
-              <li><a href="#" className="hover:text-accent transition-colors">Blog</a></li>
-              <li><a href="#" className="hover:text-accent transition-colors">Careers</a></li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="text-xs font-bold mb-4 uppercase tracking-wider">Legal</h4>
-            <ul className="space-y-2.5 text-xs text-primary-foreground/70">
-              <li><a href="#" className="hover:text-accent transition-colors">Privacy</a></li>
-              <li><a href="#" className="hover:text-accent transition-colors">Terms</a></li>
-              <li><a href="#" className="hover:text-accent transition-colors">Contact</a></li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="pt-8 border-t border-primary-foreground/10 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-primary-foreground/70">
-          <p>&copy; 2025 Abhyasi. All rights reserved.</p>
-          <div className="flex gap-6">
-            <a href="#" className="hover:text-accent transition-colors">Twitter</a>
-            <a href="#" className="hover:text-accent transition-colors">LinkedIn</a>
-            <a href="#" className="hover:text-accent transition-colors">GitHub</a>
-          </div>
-        </div>
+          {/* Bottom Section */}
+          <motion.div
+            className="flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-foreground/50"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+          >
+            <div>
+              &copy; {currentYear} Abhyaasi. All rights reserved.
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+              <span>All systems operational</span>
+            </div>
+          </motion.div>
+        </motion.div>
       </div>
     </footer>
   )
 }
+
